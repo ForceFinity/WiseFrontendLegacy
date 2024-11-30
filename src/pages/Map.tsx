@@ -1,6 +1,9 @@
 import MainNav from '@/components/MainNav';
 import Mapcomponent from '@/components/ui/mapcomponent';
 import PopupPath from '@/components/ui/popupPath';
+import PopupBusStop from '@/components/ui/popupBusStop';
+import PopupBuses from '@/components/ui/popupBuses';
+import SearchBar from '@/components/ui/SearchBar';
 
 
 
