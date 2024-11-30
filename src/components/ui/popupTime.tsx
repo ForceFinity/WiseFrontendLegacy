@@ -14,7 +14,7 @@ import { ScrollArea } from "@/components/ui/ScrollArea.tsx";
 const popupTime = () => {
   return (
     <div className='flex justify-center'>
-      <Card className='bottom-16 fixed h-64 w-9/12 z-20'>
+      <Card className='bottom-16 fixed h-48 w-9/12 z-20'>
         <ScrollArea className="h-full w-full">
           <div className="flex flex-row">
             <CardHeader>
