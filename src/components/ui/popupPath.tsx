@@ -21,7 +21,7 @@ import {
 } from "@/components/ui/select"
 
 
-const Map = () => {
+const popupPath = () => {
   return (
     <div className="fixed flex flex-col justify-center align-middle top-2/3 max-w-sm w-full">
       <div className="h-2/4 w-0"/>
@@ -42,4 +42,4 @@ const Map = () => {
   );
 };
 
-export default Map;
+export default popupPath;

@@ -21,7 +21,7 @@ import {
 } from "@/components/ui/select"
 
 
-const popupTime = () => {
+const popupBuses = () => {
   return (
     <div className='flex justify-center w-full'>
     <Card className='bottom-16 fixed z-20'>
@@ -30,33 +30,24 @@ const popupTime = () => {
       <b className="text-xl">6</b>
           <CardDescription>Supporting line text</CardDescription>
       </CardHeader>
-      <div className="flex justify-center items-center">
-        <CardDescription>Time left</CardDescription>
-      </div>
       </div>
       <hr />
       <div className="flex flex-row">
       <CardHeader>
-      <b className="text-xl">15 4</b>
+      <b className="text-xl">Б1</b>
           <CardDescription>Supporting line text</CardDescription>
       </CardHeader>
-      <div className="flex justify-center items-center">
-        <CardDescription className="mr-8">Time left</CardDescription>
-      </div>
       </div>
       <hr />
       <div className="flex flex-row">
       <CardHeader>
-      <b className="text-xl">Пеша</b>
+          <b className="text-xl">15</b>
           <CardDescription>Supporting line text</CardDescription>
       </CardHeader>
-      <div className="flex justify-center items-center">
-        <CardDescription>Time left</CardDescription>
-      </div>
       </div>
     </Card>
     </div>
   );
 };
 
-export default popupTime;
+export default popupBuses;
