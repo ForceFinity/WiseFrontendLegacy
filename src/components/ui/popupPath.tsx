@@ -23,7 +23,7 @@ import {
 
 const Map = () => {
   return (
-    <div className="fixed flex flex-col justify-center align-middle h-full max-w-sm w-full">
+    <div className="fixed flex flex-col justify-center align-middle top-2/3 max-w-sm w-full">
       <div className="h-2/4 w-0"/>
       <div className="flex flex-row justify-center align-middle z-30 w-full">
         <div className='grid place-content-center'>
