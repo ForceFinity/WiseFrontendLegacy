@@ -6,10 +6,11 @@ import 'leaflet/dist/leaflet.css';
 
 const Map = () => {
   return (
-    <MapContainer center={[42.500, 27.47]} zoom={13} className='h-fit grow z-0'>
+    <MapContainer zoomControl={false} center={[42.500, 27.47]} zoom={13} className='fixed w-full h-full grow z-0'>
       <TileLayer
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        url="https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png"
+        attribution='&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        maxZoom={20} minZoom={0}
       />
       <Marker position={[42.500, 27.47]}>
         <Popup>

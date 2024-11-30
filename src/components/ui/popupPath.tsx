@@ -7,7 +7,7 @@ import { Label } from "@/components/ui/label"
 
 const Map = () => {
   return (
-    <div className="fixed flex flex-col justify-center align-middle top-2/3 w-full">
+    <div className="fixed flex flex-col justify-center align-middle top-2/3 max-w-md w-full">
       <div className="flex flex-row justify-center align-middle z-30 w-full">
         <div className='grid place-content-center'>
             <div className="grid w-full items-center gap-1.5">
