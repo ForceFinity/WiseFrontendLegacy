@@ -1,4 +1,3 @@
-import ReactDOM from 'react-dom/client';
 import HamburgerSVG from './svg/Hamburger';
 import {
     DropdownMenu,
@@ -14,13 +13,12 @@ import {
     DropdownMenuSubTrigger,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { Button } from '@/components/ui/button';
 
 
 export default function MainNav() {
     return (
-        <div className='z-20 w-full'>
-            <div className="w-full h-full flex flex-row items-center text-2xl pt-10 px-8 bg-white gap-8">
+        <div className='z-20 h-16 flex align-middle items-center flex-col w-full'>
+            <div className="w-full h-full flex flex-row items-center text-2xl px-8 bg-white gap-8">
                     <div className="flex flex-col">
                         <div className="flex flex-row font-bold items-center">
                             <h1 className="text-center">WiseTransport</h1>
@@ -31,7 +29,7 @@ export default function MainNav() {
 
                     <DropdownMenu>
                         <DropdownMenuTrigger>
-                            <HamburgerSVG className="w-16 h-16" />
+                            <HamburgerSVG className="w-12 h-12" />
                         </DropdownMenuTrigger>
                         <DropdownMenuContent className="w-56">
                             <DropdownMenuLabel>My Account</DropdownMenuLabel>
