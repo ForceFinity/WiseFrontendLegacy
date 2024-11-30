@@ -1,6 +1,5 @@
 import MainNav from '@/components/MainNav';
 import Mapcomponent from '@/components/ui/mapcomponent';
-import PopupTime from '@/components/ui/popupTime';
 import PopupPath from '@/components/ui/popupPath';
 
 
