@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 
 
-const Map = () => {
+const popupPath = () => {
   return (
     <div className="fixed flex flex-col justify-center align-middle top-2/3 max-w-md w-full">
       <div className="flex flex-row justify-center align-middle z-30 w-full">
@@ -25,4 +25,4 @@ const Map = () => {
   );
 };
 
-export default Map;
+export default popupPath;

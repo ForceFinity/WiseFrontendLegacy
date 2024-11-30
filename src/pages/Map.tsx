@@ -1,7 +1,7 @@
+import MainNav from '@/components/MainNav';
 import Mapcomponent from '@/components/ui/mapcomponent';
+import PopupPath from '@/components/ui/popupPath';
 import SearchBar from "@/components/ui/SearchBar.tsx";
-import PopupTime from "@/components/ui/popupTime.tsx";
-
 
 
 function App() {
@@ -10,7 +10,7 @@ function App() {
     <div className="flex flex-col items-center h-screen">
       <SearchBar />
       <Mapcomponent/>
-      <PopupTime />
+      <PopupPath/>
     </div>
   );
 }

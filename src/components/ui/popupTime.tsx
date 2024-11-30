@@ -11,14 +11,14 @@ import {
 import { ScrollArea } from "@/components/ui/ScrollArea.tsx";
 
 
-const Map = () => {
+const popupTime = () => {
   return (
     <div className='flex justify-center'>
       <Card className='bottom-16 fixed h-64 w-9/12 z-20'>
         <ScrollArea className="h-full w-full">
           <div className="flex flex-row">
             <CardHeader>
-              <CardTitle>6</CardTitle>
+              <b className="text-xl">6</b>
               <CardDescription>Supporting line text</CardDescription>
             </CardHeader>
             <div className="flex justify-center items-center">
@@ -28,7 +28,7 @@ const Map = () => {
           <hr/>
           <div className="flex flex-row">
             <CardHeader>
-              <CardTitle>15 4</CardTitle>
+              <b className="text-xl">15 4</b>
               <CardDescription>Supporting line text</CardDescription>
             </CardHeader>
             <div className="flex justify-center items-center">
@@ -38,7 +38,7 @@ const Map = () => {
           <hr/>
           <div className="flex flex-row">
             <CardHeader>
-              <CardTitle>Пеша</CardTitle>
+              <b className="text-xl">Пеша</b>
               <CardDescription>Supporting line text</CardDescription>
             </CardHeader>
             <div className="flex justify-center items-center">
@@ -51,4 +51,4 @@ const Map = () => {
   );
 };
 
-export default Map;
+export default popupTime;
