@@ -1,4 +1,3 @@
-import MainNav from '@/components/MainNav';
 import Mapcomponent from '@/components/ui/mapcomponent';
 import PopupPath from '@/components/ui/popupPath';
 import SearchBar from "@/components/ui/SearchBar.tsx";

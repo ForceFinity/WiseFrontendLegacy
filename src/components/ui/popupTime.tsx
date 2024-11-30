@@ -3,10 +3,9 @@
 
 import {
   Card,
-  CardContent,
   CardDescription,
-  CardFooter, CardHeader,
-  CardTitle,
+  CardHeader,
+
 } from "@/components/ui/card"
 import { ScrollArea } from "@/components/ui/ScrollArea.tsx";
 
@@ -28,7 +27,7 @@ const popupTime = () => {
           <hr/>
           <div className="flex flex-row">
             <CardHeader>
-              <b className="text-xl">15 4</b>
+              <b className="text-xl">15 -> 4</b>
               <CardDescription>Supporting line text</CardDescription>
             </CardHeader>
             <div className="flex justify-center items-center">
