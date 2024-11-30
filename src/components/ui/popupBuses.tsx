@@ -24,7 +24,7 @@ import {
 const popupBuses = () => {
   return (
     <div className='flex justify-center w-full'>
-    <Card className='bottom-16 fixed z-20'>
+    <Card className='bottom-16 fixed z-20 shadow-md'>
     <div className="flex flex-row">
       <CardHeader>
       <b className="text-xl">6</b>

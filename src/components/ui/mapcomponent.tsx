@@ -3,8 +3,20 @@
 
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
+import L from 'leaflet';
+import React from 'react';
 
 const Map = () => {
+  const customIcon = new L.Icon({
+    iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png', // Default marker image URL
+    iconSize: [25, 41],  // Size of the icon
+    iconAnchor: [12, 41],  // Position of the anchor point
+    popupAnchor: [1, -34],  // Position of the popup anchor
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',  // Optional shadow URL
+    shadowSize: [41, 41],  // Size of the shadow
+  }
+)
+
   return (
     <MapContainer zoomControl={false} center={[42.500, 27.47]} zoom={13} className='fixed w-full h-full grow z-0'>
       <TileLayer
