@@ -18,7 +18,7 @@ function App() {
       <SearchBar />
       <Sidebar/>
       <Mapcomponent/>
-      <PopupRadius/>
+      <PopupBusStop/>
     </div>
   );
 }

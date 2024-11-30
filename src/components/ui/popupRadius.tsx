@@ -27,7 +27,7 @@ function popupRadius() {
 
   return (
     <div className='flex justify-center'>
-      <Card className='bottom-16 fixed h-40 w-10/12 z-20'>
+      <Card className='bottom-16 fixed h-40 w-10/12 z-20 shadow-md'>
           <div className="flex flex-row text-center">
             <CardHeader className='w-full'>
               <p className="text-xl">Задайте разстояние на<br />което да Ви събудим</p>

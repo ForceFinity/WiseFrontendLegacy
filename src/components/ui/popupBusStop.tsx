@@ -27,8 +27,8 @@ const popupBusStop = () => {
   return (
     <div className="fixed flex flex-col justify-center align-middle top-1/2 max-w-sm w-full z-30">
       <div className="flex flex-row justify-center align-middle w-full">
-        <div className='grid place-content-center'>
-          <Card className='text-center'>
+        <div className='grid place-content-center '>
+          <Card className='text-center shadow-md'>
             <div className="flex flex-row">
               <CardHeader>
                 <p className="text-xl">Почти стигнахте</p>

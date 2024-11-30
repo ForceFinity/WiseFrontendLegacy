@@ -12,11 +12,11 @@ const popupPath = () => {
         <div className='grid place-content-center'>
             <div className="grid w-full items-center gap-1.5">
           <Label htmlFor="email">От</Label>
-          <Input placeholder="Сегашна Дестинация" />
+          <Input placeholder="Сегашна Дестинация" className="shadow-md"/>
         </div>
         <div className="grid w-full items-center gap-1.5">
           <Label>До</Label>
-          <Input  id="email" placeholder="Крайна дестинация"/>
+          <Input  id="email" placeholder="Крайна дестинация" className="shadow-md"/>
         </div>
         </div>
       </div>
