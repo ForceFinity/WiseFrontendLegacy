@@ -13,10 +13,11 @@ import {
 import { ScrollArea } from "@/components/ui/ScrollArea.tsx";
 import { Button } from "./button";
 
-function popupRadius({value, setValue, handleWakeuper}:
+function popupRadius({value, setValue, handleWakeuper, setUi}:
   { value: string, 
     setValue: React.Dispatch<React.SetStateAction<string>>,
-    handleWakeuper: () => void
+    handleWakeuper: () => void,
+    setUi: React.Dispatch<React.SetStateAction<number>>
   }) {
 
   const handleChange = (event: { target: { value: any; }; }) => {

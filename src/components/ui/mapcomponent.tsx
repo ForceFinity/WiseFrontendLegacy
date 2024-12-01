@@ -1,6 +1,6 @@
 'use client';
 
-import { MapContainer, Marker, Popup, TileLayer, useMapEvents } from 'react-leaflet';
+import { Circle, MapContainer, Marker, Popup, TileLayer, useMapEvents } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import { useState, useRef, useEffect } from 'react';
@@ -13,6 +13,13 @@ const Map = ({location, markedLocation, setMarkedLocation}:{
     }) => {
     const mapRef = useRef<L.Map | null>(null);
     const [isMarkerVisible, setIsMarkerVisible] = useState(true);
+    const [alarms, setAlarms] = useState<data[]>();
+
+    type data = {
+        user_coords: coord,
+        destination_coords: coord,
+        range: number
+    }
 
     const updatePosition = () => {
         if (mapRef.current) {
@@ -25,6 +32,22 @@ const Map = ({location, markedLocation, setMarkedLocation}:{
             if (newPosition.lat !== markedLocation.lat || newPosition.lon !== markedLocation.lon) {
                 setMarkedLocation(newPosition);
             }
+
+            const alarmsString = localStorage.getItem('Alarms');
+
+            let alarms: data[] = [];
+            if (alarmsString) {
+            try {
+                console.log("Parsing alarms from localStorage");
+    
+                alarms = JSON.parse(alarmsString) as data[];
+                setAlarms(alarms);
+
+            } catch (error) {
+                console.error("Error parsing alarms from localStorage", error);
+            }
+        }
+
         }
     };
 
@@ -95,6 +118,13 @@ const Map = ({location, markedLocation, setMarkedLocation}:{
                     </Marker>
                 </>
             )}
+            
+            {alarms?.map((e, index) => (
+                <Circle center={[
+                    !!e.destination_coords.lat ? e.destination_coords.lat : 0,
+                    !!e.destination_coords.lon ? e.destination_coords.lon : 0]} pathOptions={{fillColor: 'blue'}} radius={e.range} />
+             ))}
+            
         </MapContainer>
     );
 };

@@ -70,6 +70,7 @@ function App() {
         }
         alarms.push(alarm);
         localStorage.setItem('Alarms', JSON.stringify(alarms));
+        setUi(0);
     };
     
 
@@ -84,11 +85,12 @@ function App() {
             <Sidebar ui={ui} setUi={setUi}/>
             <Mapcomponent location={location} markedLocation={markedLocation} setMarkedLocation={setMarkedLocation} />
 
-            {/* <PopupTime /> */}
-            <PopupRadius value={value} setValue={setValue} handleWakeuper={handleWakeuper} />
-
-            {isAlarmOn && <div className="h-full w-full z-20 backdrop-blur" />}
-            {isAlarmOn && <PopupBusStop setIsOpen={setIsAlarmOn} />}
+            { ui == 3 &&
+                <PopupRadius value={value} setValue={setValue} handleWakeuper={handleWakeuper}  setUi={setUi} />
+            }
+            
+            {/* {isAlarmOn && <div className="h-full w-full z-20 backdrop-blur" />}
+            {isAlarmOn && <PopupBusStop setIsOpen={setIsAlarmOn} />} */}
         </div>
     );
 }
