@@ -6,7 +6,7 @@ import { useState } from "react";
 import PopupTime from "@/components/ui/popupTime.tsx";
 
 function App() {
-    const [isAlarmOn, setIsAlarmOn] = useState(true);
+    const [isAlarmOn, setIsAlarmOn] = useState(false);
 
     return (
         <div className={"flex flex-col items-center h-screen"}>
