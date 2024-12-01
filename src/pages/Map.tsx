@@ -2,8 +2,8 @@ import Mapcomponent from '@/components/ui/mapcomponent.tsx';
 import PopupBusStop from '@/components/ui/popupBusStop.tsx';
 import SearchBar from "@/components/ui/SearchBar.tsx";
 import Sidebar from "@/components/ui/sidebar.tsx";
+import PopupRadius from '@/components/ui/popupRadius';
 import { useState } from "react";
-import PopupTime from "@/components/ui/popupTime.tsx";
 
 function App() {
     const [isAlarmOn, setIsAlarmOn] = useState(false);
@@ -14,9 +14,11 @@ function App() {
             <Sidebar/>
             <Mapcomponent/>
 
-            <PopupTime />
-            {isAlarmOn && <div className="h-full w-full z-20 backdrop-blur" />}
-            {isAlarmOn && <PopupBusStop setIsOpen={setIsAlarmOn} />}
+            {/* <PopupTime /> */}
+            <PopupRadius/>
+
+            {isAlarmOn && <div className="h-full w-full z-20 backdrop-blur"/>}
+            {isAlarmOn && <PopupBusStop setIsOpen={setIsAlarmOn}/>}
         </div>
     );
 }
