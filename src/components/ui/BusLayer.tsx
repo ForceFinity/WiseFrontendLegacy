@@ -31,7 +31,7 @@ export const BusLayer = () => {
 
     // <Polyline pathOptions={{color: "red"}} positions={examplePoly} />
     return (
-        <LayersControl.Overlay name="Bus markers">
+        <LayersControl.Overlay checked name="Bus markers">
             <LayerGroup>
                 {
                     routes.map((route, i) => (

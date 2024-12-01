@@ -47,7 +47,7 @@ export const TrainLayer = () => {
 
     // <Polyline pathOptions={{color: "red"}} positions={examplePoly} />
     return (
-        <LayersControl.Overlay name="Trains markers">
+        <LayersControl.Overlay checked name="Trains markers">
             <LayerGroup>
                 {
                     trains.map((train, i) => (
