@@ -8,56 +8,78 @@ import { useState, useRef, useEffect } from 'react';
 const Map = () => {
     const mapRef = useRef<L.Map | null>(null);
     const [position, setPosition] = useState<[number, number]>([42.500, 27.47]);
-    const [isMarkerVisible, setIsMarkerVisible] = useState(false);
+    const [isMarkerVisible, setIsMarkerVisible] = useState(true);
 
+    // Function to update position based on map movement
     const updatePosition = () => {
         if (mapRef.current) {
             const center = mapRef.current.getCenter();
-            setPosition([center.lat, center.lng]);
+            const newPosition: [number, number] = [center.lat, center.lng];
+
+            // Only update position if it has moved significantly (to avoid constant updates)
+            if (newPosition[0] !== position[0] || newPosition[1] !== position[1]) {
+                setPosition(newPosition); // Update position only if it has changed
+            }
         }
     };
 
+    // Event handler to capture map events
     const MapEventHandler = () => {
         useMapEvents({
-            move: updatePosition,
-            drag: updatePosition,
-            zoom: updatePosition,
+            moveend: updatePosition, // Trigger after map movement ends
         });
         return null;
     };
 
     useEffect(() => {
         if (mapRef.current) {
-            updatePosition();
+            updatePosition(); // Set initial position after the map is loaded
         }
     }, []);
+
     type coord = {
-        lat: number | null,
-        lon: number | null
-    }
+        lat: number | null;
+        lon: number | null;
+    };
     const [location, setLocation] = useState<coord>({ lat: null, lon: null });
     const [error, setError] = useState<null | string>(null);
 
     const requestLocation = () => {
         if ("geolocation" in navigator) {
-        navigator.geolocation.getCurrentPosition(
-            (position) => {
-            setLocation({
-                lat: position.coords.latitude,
-                lon: position.coords.longitude,
-            });
-                setError(null);
-            },
-            (err) => {
-                setError(err.message);
-            }
-        );
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    setLocation({
+                        lat: position.coords.latitude,
+                        lon: position.coords.longitude,
+                    });
+                    setError(null);
+                },
+                (err) => {
+                    setError(err.message);
+                }
+            );
         } else {
             setError("Geolocation is not supported by your browser.");
         }
     };
 
-    requestLocation()
+    useEffect(() => {
+        requestLocation();
+    }, []);
+
+    // UseEffect for smooth map centering only when position changes
+    useEffect(() => {
+        if (mapRef.current && position) {
+            // Only update map view if the position changed (avoid unnecessary pan)
+            const map = mapRef.current;
+            const currentCenter = map.getCenter();
+
+            // Check if the position has actually changed before updating the map
+            if (currentCenter.lat !== position[0] || currentCenter.lng !== position[1]) {
+                map.setView(position, 13, { animate: true }); // Animate the transition
+            }
+        }
+    }, [position]); // This effect runs when the position changes
 
     return (
         <MapContainer
@@ -85,6 +107,16 @@ const Map = () => {
                         </Popup>
                     </Marker>
                     <MapEventHandler />
+                </>
+            )}
+
+            {location.lat && location.lon && (
+                <>
+                    <Marker position={[location.lat, location.lon]}>
+                        <Popup>
+                            Current position: {location.lat.toFixed(5)}, {location.lon.toFixed(5)}
+                        </Popup>
+                    </Marker>
                 </>
             )}
         </MapContainer>
