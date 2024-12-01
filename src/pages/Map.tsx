@@ -4,7 +4,7 @@ import SearchBar from "@/components/ui/SearchBar.tsx";
 import Sidebar from "@/components/ui/sidebar.tsx";
 import PopupRadius from '@/components/ui/popupRadius';
 import { useEffect, useState } from "react";
-import PopupTime from "@/components/ui/popupTime.tsx";
+import PopupMapType from "@/components/ui/popupMapType";
 
 export type coord = {
     lat: number | null;
@@ -50,7 +50,7 @@ export type coord = {
             <Mapcomponent location={location} markedLocation={markedLocation} setMarkedLocation={setMarkedLocation}/>
 
             {/* <PopupTime /> */}
-            <PopupRadius/>
+            <PopupMapType/>
 
             {isAlarmOn && <div className="h-full w-full z-20 backdrop-blur"/>}
             {isAlarmOn && <PopupBusStop setIsOpen={setIsAlarmOn}/>}
