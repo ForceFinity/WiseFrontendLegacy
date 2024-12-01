@@ -42,6 +42,7 @@ export type coord = {
         requestLocation();
     }, []);
 
+
     return (
         <div className={"flex flex-col items-center h-screen"}>
             <SearchBar/>
@@ -50,9 +51,9 @@ export type coord = {
 
             {/* <PopupTime /> */}
             <PopupRadius/>
-            
-            {isAlarmOn && <div className="h-full w-full z-20 backdrop-blur" />}
-            {isAlarmOn && <PopupBusStop setIsOpen={setIsAlarmOn} />}
+
+            {isAlarmOn && <div className="h-full w-full z-20 backdrop-blur"/>}
+            {isAlarmOn && <PopupBusStop setIsOpen={setIsAlarmOn}/>}
         </div>
     );
 }
