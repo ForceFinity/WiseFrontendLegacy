@@ -8,7 +8,7 @@ export default function BusDynamicSVG(
 {
     return (
         <div style={{backgroundColor: `#${color}`}}
-             className="flex flex-col items-center rounded-md bg-white w-fit aspect-square p-1">
+             className="flex flex-col items-center shadow rounded-md bg-white w-fit aspect-square p-1 pr-1.5 pl-1.5">
             <svg className={className} width="12px" height="12px" viewBox="0 0 24 24" fill="none"
                  xmlns="http://www.w3.org/2000/svg">
                 <path

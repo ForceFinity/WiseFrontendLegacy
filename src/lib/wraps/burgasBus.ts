@@ -23,7 +23,7 @@ export interface Route extends RouteBase {
 
 const BASE_URL = "https://www.telelink.city/api/v1/949021bc-c2c0-43ad-a146-20e19bbc3649/transport"
 
-export const fetch_buses_coords = async (): Promise<Route[]> => {
+export const fetch_buses = async (): Promise<Route[]> => {
     const routes = await axios.get<RouteRaw[]>(BASE_URL + "/planner/routes")
     const results: Route[] = []
 

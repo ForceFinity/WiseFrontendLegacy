@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { flatDistance, getRandomInt } from "@/lib/utils.ts";
 import { Marker } from "react-leaflet";
-import { DivIcon, Icon } from "leaflet";
+import { DivIcon, Icon, LatLng } from "leaflet";
 
 interface IMovingMarker {
     polyline: number[][];
@@ -18,7 +18,7 @@ export const MovingMarker = ({
      reverse = false, // Default is no reversing
      randomStepRange, // Default is no offset
  }: IMovingMarker) => {
-    const [currentPosition, setCurrentPosition] = useState(polyline[0]);
+    const [currentPosition, setCurrentPosition] = useState(new LatLng(polyline[0][0], polyline[0][1]));
     const markerRef = useRef<L.Marker>(null);
     speed = speed || 5;
 
@@ -72,7 +72,7 @@ export const MovingMarker = ({
                 const lat = start[0] + t * (end[0] - start[0]);
                 const lng = start[1] + t * (end[1] - start[1]);
 
-                setCurrentPosition([lat, lng]);
+                setCurrentPosition(new LatLng(lat, lng));
                 markerRef.current?.setLatLng([lat, lng]);
 
                 currentFrame++;
@@ -85,7 +85,7 @@ export const MovingMarker = ({
         moveMarker();
 
         return () => cancelAnimationFrame(requestId);
-    }, [polyline, reverse, ]);
+    }, [polyline, reverse]);
 
     if(icon)
         return (

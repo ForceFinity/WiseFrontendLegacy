@@ -1,96 +1,72 @@
 'use client';
 
-import { MapContainer, Marker, Popup, TileLayer, useMapEvents } from 'react-leaflet';
+import { LayersControl, MapContainer, Marker, Popup, TileLayer, useMapEvents } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import { useState, useRef, useEffect } from 'react';
-import { BusMarkers } from "@/components/ui/BusMarkers.tsx";
+import { coord } from '@/pages/Map';
+import { BusLayer } from "@/components/ui/BusLayer.tsx";
+import { TrainLayer } from "@/components/ui/TrainLayer.tsx";
 
-const MapComponent = () => {
+const Map = ({location, markedLocation, setMarkedLocation}:{
+        location: coord
+        markedLocation: coord,
+        setMarkedLocation: React.Dispatch<React.SetStateAction<coord>>
+    }) => {
     const mapRef = useRef<L.Map | null>(null);
-    const [position, setPosition] = useState<[number, number]>([42.500, 27.47]);
-    const [isMarkerVisible, setIsMarkerVisible] = useState(true);
+    const [isMarkerVisible, ] = useState(true);
 
-    // Function to update position based on map movement
     const updatePosition = () => {
         if (mapRef.current) {
             const center = mapRef.current.getCenter();
-            const newPosition: [number, number] = [center.lat, center.lng];
+            const newPosition: coord = {
+                lat: center.lat,
+                lon: center.lng
+            };
 
-            // Only update position if it has moved significantly (to avoid constant updates)
-            if (newPosition[0] !== position[0] || newPosition[1] !== position[1]) {
-                setPosition(newPosition); // Update position only if it has changed
+            if (newPosition.lat !== markedLocation.lat || newPosition.lon !== markedLocation.lon) {
+                setMarkedLocation(newPosition);
             }
         }
     };
 
-    // Event handler to capture map events
     const MapEventHandler = () => {
         useMapEvents({
-            moveend: updatePosition, // Trigger after map movement ends
+            moveend: updatePosition,
         });
         return null;
     };
 
     useEffect(() => {
         if (mapRef.current) {
-            updatePosition(); // Set initial position after the map is loaded
+            updatePosition();
         }
     }, []);
 
-    type coord = {
-        lat: number | null;
-        lon: number | null;
-    };
-    const [location, setLocation] = useState<coord>({ lat: null, lon: null });
-    const [error, setError] = useState<null | string>(null);
-
-    const requestLocation = () => {
-        if ("geolocation" in navigator) {
-            navigator.geolocation.getCurrentPosition(
-                (position) => {
-                    setLocation({
-                        lat: position.coords.latitude,
-                        lon: position.coords.longitude,
-                    });
-                    setError(null);
-                },
-                (err) => {
-                    setError(err.message);
-                }
-            );
-        } else {
-            setError("Geolocation is not supported by your browser.");
-        }
-    };
-
     useEffect(() => {
-        requestLocation();
-    }, []);
-
-    // UseEffect for smooth map centering only when position changes
-    useEffect(() => {
-        if (mapRef.current && position) {
-            // Only update map view if the position changed (avoid unnecessary pan)
+        if (mapRef.current && markedLocation) {
             const map = mapRef.current;
             const currentCenter = map.getCenter();
 
-            // Check if the position has actually changed before updating the map
-            if (currentCenter.lat !== position[0] || currentCenter.lng !== position[1]) {
-                map.setView(position, 13, { animate: true }); // Animate the transition
+            if (currentCenter.lat !== markedLocation.lat || currentCenter.lng !== markedLocation.lon) {
+                map.setView([!!markedLocation.lat ? markedLocation.lat : 0,
+                             !!markedLocation.lon ? markedLocation.lon : 0],
+                              13,
+                            { animate: true });
             }
         }
-    }, [position]); // This effect runs when the position changes
+    }, [markedLocation]);
 
     return (
         <MapContainer
             ref={(instance) => {
                 if (instance) {
-                    mapRef.current = instance; // Save map instance
+                    mapRef.current = instance; 
                 }
             }}
             zoomControl={false}
-            center={position}
+            center={[!!markedLocation.lat ? markedLocation.lat : 0,
+                     !!markedLocation.lon ? markedLocation.lon : 0]}
             zoom={13}
             className="fixed w-full h-full grow z-0"
         >
@@ -100,30 +76,33 @@ const MapComponent = () => {
                 maxZoom={20}
                 minZoom={0}
             />
-            <BusMarkers />
+            <LayersControl position="bottomright">
+                <BusLayer />
+                <TrainLayer />
+                {isMarkerVisible && (
+                    <>
+                        <Marker position={[!!markedLocation.lat ? markedLocation.lat : 0,
+                         !!markedLocation.lon ? markedLocation.lon : 0]}>
+                            <Popup>
+                                Current position: {!!markedLocation.lat ? markedLocation.lat : 0}, {!!markedLocation.lon ? markedLocation.lon : 0}
+                            </Popup>
+                        </Marker>
+                        <MapEventHandler />
+                    </>
+                )}
 
-            {isMarkerVisible && (
-                <>
-                    <Marker position={position}>
-                        <Popup>
-                            Current position: {position[0].toFixed(5)}, {position[1].toFixed(5)}
-                        </Popup>
-                    </Marker>
-                    <MapEventHandler />
-                </>
-            )}
-
-            {location.lat && location.lon && (
-                <>
-                    <Marker position={[location.lat, location.lon]}>
-                        <Popup>
-                            Current position: {location.lat.toFixed(5)}, {location.lon.toFixed(5)}
-                        </Popup>
-                    </Marker>
-                </>
-            )}
+                {location.lat && location.lon && (
+                    <>
+                        <Marker position={[location.lat, location.lon]}>
+                            <Popup>
+                                Current position: {location.lat.toFixed(5)}, {location.lon.toFixed(5)}
+                            </Popup>
+                        </Marker>
+                    </>
+                )}
+            </LayersControl>
         </MapContainer>
     );
 };
 
-export default MapComponent;
+export default Map;
