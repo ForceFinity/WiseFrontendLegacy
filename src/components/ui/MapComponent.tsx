@@ -1,11 +1,13 @@
 /* eslint-disable no-extra-boolean-cast */
 'use client';
 
-import { Circle, MapContainer, Marker, Popup, TileLayer, useMapEvents } from 'react-leaflet';
+import { Circle, LayersControl, MapContainer, Marker, Popup, TileLayer, useMapEvents } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import React, { useEffect, useRef, useState } from 'react';
 import { coord } from '@/pages/Map';
+import { BusLayer } from "@/components/ui/BusLayer.tsx";
+import { TrainLayer } from "@/components/ui/TrainLayer.tsx";
 
 export const MapComponent = ({location, markedLocation, setMarkedLocation}: {
     location: coord
@@ -98,6 +100,12 @@ export const MapComponent = ({location, markedLocation, setMarkedLocation}: {
                 maxZoom={20}
                 minZoom={0}
             />
+
+            <LayersControl position="bottomright">
+                <BusLayer />
+                <TrainLayer />
+            </LayersControl>
+
             {isMarkerVisible && (
                 <>
                     <Marker position={[!!markedLocation.lat ? markedLocation.lat : 0,
