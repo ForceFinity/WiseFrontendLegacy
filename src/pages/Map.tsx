@@ -11,13 +11,17 @@ export type coord = {
     lon: number | null;
 };
 
-    function App() {
+function App() {
     const [isAlarmOn, setIsAlarmOn] = useState(true);
-    
+
     const [location, setLocation] = useState<coord>({ lat: null, lon: null });
     const [error, setError] = useState<null | string>(null);
 
     const [markedLocation, setMarkedLocation] = useState<coord>({ lat: 42.500, lon: 27.47 });
+
+    const [value, setValue] = useState('');
+
+    const [ui, setUi] = useState<number>(0);
 
     const requestLocation = () => {
         if ("geolocation" in navigator) {
@@ -37,6 +41,37 @@ export type coord = {
             setError("Geolocation is not supported by your browser.");
         }
     };
+    type data = {
+        user_coords: coord,
+        destination_coords: coord,
+        range: number
+    }
+
+    const handleWakeuper = () => {
+        const alarmsString = localStorage.getItem('Alarms');
+    
+        console.log("Adding new alarm");
+    
+        const alarm = {
+            user_coords: location,
+            destination_coords: markedLocation,
+            range: parseInt(value)
+        };
+    
+        let alarms: data[] = [];
+        if (alarmsString) {
+            try {
+                console.log("Parsing alarms from localStorage");
+    
+                alarms = JSON.parse(alarmsString) as data[];
+            } catch (error) {
+                console.error("Error parsing alarms from localStorage", error);
+            }
+        }
+        alarms.push(alarm);
+        localStorage.setItem('Alarms', JSON.stringify(alarms));
+    };
+    
 
     useEffect(() => {
         requestLocation();
@@ -45,15 +80,15 @@ export type coord = {
 
     return (
         <div className={"flex flex-col items-center h-screen"}>
-            <SearchBar/>
-            <Sidebar/>
-            <Mapcomponent location={location} markedLocation={markedLocation} setMarkedLocation={setMarkedLocation}/>
+            <SearchBar />
+            <Sidebar ui={ui} setUi={setUi}/>
+            <Mapcomponent location={location} markedLocation={markedLocation} setMarkedLocation={setMarkedLocation} />
 
             {/* <PopupTime /> */}
-            <PopupRadius/>
+            <PopupRadius value={value} setValue={setValue} handleWakeuper={handleWakeuper} />
 
-            {isAlarmOn && <div className="h-full w-full z-20 backdrop-blur"/>}
-            {isAlarmOn && <PopupBusStop setIsOpen={setIsAlarmOn}/>}
+            {isAlarmOn && <div className="h-full w-full z-20 backdrop-blur" />}
+            {isAlarmOn && <PopupBusStop setIsOpen={setIsAlarmOn} />}
         </div>
     );
 }
