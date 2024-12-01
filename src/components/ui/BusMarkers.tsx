@@ -33,7 +33,13 @@ export const BusMarkers = () => {
         <>
             {
                 routes.map((route, i) => (
-                    <MovingMarker key={i} icon={getBusIcon(route)} polyline={route.polyline} speed={5}/>
+                    <MovingMarker
+                        key={i}
+                        icon={getBusIcon(route)}
+                        polyline={route.polyline}
+                        randomStepRange={[50, 100]}
+                        speed={5}
+                    />
                 ))
             }
         </>

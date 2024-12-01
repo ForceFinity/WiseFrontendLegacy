@@ -1,18 +1,19 @@
-import Mapcomponent from '@/components/ui/mapcomponent.tsx';
+import MapComponent from '@/components/ui/MapComponent.tsx';
 import PopupBusStop from '@/components/ui/popupBusStop.tsx';
 import SearchBar from "@/components/ui/SearchBar.tsx";
 import Sidebar from "@/components/ui/sidebar.tsx";
 import PopupRadius from '@/components/ui/popupRadius';
 import { useState } from "react";
+import { BusMarkers } from "@/components/ui/BusMarkers.tsx";
 
-function App() {
+function Map() {
     const [isAlarmOn, setIsAlarmOn] = useState(false);
 
     return (
         <div className={"flex flex-col items-center h-screen"}>
             <SearchBar/>
             <Sidebar/>
-            <Mapcomponent/>
+            <MapComponent/>
 
             {/* <PopupTime /> */}
             <PopupRadius/>
@@ -23,4 +24,4 @@ function App() {
     );
 }
 
-export default App;
+export default Map;

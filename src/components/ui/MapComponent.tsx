@@ -4,8 +4,9 @@ import { MapContainer, Marker, Popup, TileLayer, useMapEvents } from 'react-leaf
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import { useState, useRef, useEffect } from 'react';
+import { BusMarkers } from "@/components/ui/BusMarkers.tsx";
 
-const Map = () => {
+const MapComponent = () => {
     const mapRef = useRef<L.Map | null>(null);
     const [position, setPosition] = useState<[number, number]>([42.500, 27.47]);
     const [isMarkerVisible, setIsMarkerVisible] = useState(true);
@@ -99,6 +100,8 @@ const Map = () => {
                 maxZoom={20}
                 minZoom={0}
             />
+            <BusMarkers />
+
             {isMarkerVisible && (
                 <>
                     <Marker position={position}>
@@ -123,4 +126,4 @@ const Map = () => {
     );
 };
 
-export default Map;
+export default MapComponent;

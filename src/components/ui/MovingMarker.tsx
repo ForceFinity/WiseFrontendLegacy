@@ -1,41 +1,57 @@
 import { useEffect, useRef, useState } from "react";
-import { flatDistance } from "@/lib/utils.ts";
+import { flatDistance, getRandomInt } from "@/lib/utils.ts";
 import { Marker } from "react-leaflet";
 import { DivIcon, Icon } from "leaflet";
 
 interface IMovingMarker {
-    polyline: number[][],
-    speed?: number,
+    polyline: number[][];
+    speed?: number;
     icon?: Icon | DivIcon;
+    reverse?: boolean; // Option to reverse direction
+    randomStepRange?: number[]; // Maximum offset in meters
 }
 
 export const MovingMarker = ({
-    polyline,
-    speed,  // speed in meters per second
-    icon
-}: IMovingMarker) => {
+     polyline,
+     speed,  // speed in meters per second
+     icon,
+     reverse = false, // Default is no reversing
+     randomStepRange, // Default is no offset
+ }: IMovingMarker) => {
     const [currentPosition, setCurrentPosition] = useState(polyline[0]);
     const markerRef = useRef<L.Marker>(null);
-    speed = speed ? speed : 5
+    speed = speed || 5;
 
     useEffect(() => {
-        let step = 0;
+        let step = randomStepRange ? getRandomInt(randomStepRange[0], randomStepRange[1]) : 0;
+        let direction = 1; // 1 for forward, -1 for reverse
         let requestId: number;
 
         const moveMarker = () => {
-            if (step >= polyline.length - 1) {
-                cancelAnimationFrame(requestId);
-                return;
+            if (step >= polyline.length - 1 && direction === 1) {
+                if (reverse) {
+                    direction = -1; // Reverse direction
+                    step--;
+                } else {
+                    cancelAnimationFrame(requestId);
+                    return;
+                }
+            } else if (step <= 0 && direction === -1) {
+                if (reverse) {
+                    direction = 1; // Forward direction
+                    step++;
+                } else {
+                    cancelAnimationFrame(requestId);
+                    return;
+                }
             }
 
             const start = polyline[step];
-            const end = polyline[step + 1];
+            const end = polyline[step + direction];
 
-            if (start[0] == end[0] && start[1] == end[1]) {
-                step++
-                if (step < polyline.length - 1) {
-                    moveMarker();
-                }
+            if (start[0] === end[0] && start[1] === end[1]) {
+                step += direction;
+                moveMarker();
                 return;
             }
 
@@ -47,10 +63,8 @@ export const MovingMarker = ({
             let currentFrame = 0;
             const interpolate = () => {
                 if (currentFrame > totalFrames) {
-                    step++;
-                    if (step < polyline.length - 1) {
-                        moveMarker();
-                    }
+                    step += direction;
+                    moveMarker();
                     return;
                 }
 
@@ -71,7 +85,7 @@ export const MovingMarker = ({
         moveMarker();
 
         return () => cancelAnimationFrame(requestId);
-    }, [polyline]);
+    }, [polyline, reverse, ]);
 
     if(icon)
         return (
