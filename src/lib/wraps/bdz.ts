@@ -15,7 +15,7 @@ interface TrainRaw extends Train {
     date: string
 }
 
-const BASE_URL = "http://localhost:8001"
+const BASE_URL = "http://0.0.0.0:8003"
 
 export const fetch_trains = async (): Promise<Train[]> => {
     const routes = await axios.get<TrainRaw[]>(BASE_URL + "/trains")
