@@ -84,8 +84,9 @@ function App() {
             <Sidebar ui={ui} setUi={setUi}/>
             <Mapcomponent location={location} markedLocation={markedLocation} setMarkedLocation={setMarkedLocation} />
 
-            {/* <PopupTime /> */}
-            <PopupRadius value={value} setValue={setValue} handleWakeuper={handleWakeuper} />
+            {/* <PopupTime />
+            <PopupRadius value={value} setValue={setValue} handleWakeuper={handleWakeuper} /> */}
+            <PopupMapType/>
 
             {isAlarmOn && <div className="h-full w-full z-20 backdrop-blur" />}
             {isAlarmOn && <PopupBusStop setIsOpen={setIsAlarmOn} />}
