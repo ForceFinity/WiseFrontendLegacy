@@ -1,7 +1,8 @@
 import { Input } from "@/components/ui/input"
-import TrainSVG from "@/components/svg/TrainSVG";
-import MapSVG from "@/components/svg/MapSVG";
+import SettingsSVG from "@/components/svg/Settings1SVG";
 import ClockSVG from "@/components/svg/ClockSVG";
+import TrainSVG from "../svg/Train1SVG";
+import MapSVG from "../svg/MapSVG";
 
 export default function sidebar({ui, setUi}:{ui: number, setUi: React.Dispatch<React.SetStateAction<number>>}) {
     return (

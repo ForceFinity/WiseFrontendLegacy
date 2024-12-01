@@ -4,7 +4,7 @@ import SearchBar from "@/components/ui/SearchBar.tsx";
 import Sidebar from "@/components/ui/sidebar.tsx";
 import PopupRadius from '@/components/ui/popupRadius';
 import { useEffect, useState } from "react";
-import PopupTime from "@/components/ui/popupTime.tsx";
+import PopupMapType from "@/components/ui/popupMapType";
 
 export type coord = {
     lat: number | null;
