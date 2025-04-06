@@ -1,7 +1,7 @@
 # WiseFrontend (Legacy Version) 
 
 
-This is the React frontend for **Project Name**, a real-time public transport tracking platform integrating data from BurgasBus and BDZ. It connects to two backend microservices:  
+This is the React frontend for **Wise**, a real-time public transport tracking platform integrating data from BurgasBus and BDZ. It connects to two backend microservices:  
 
 - [**BurgasBusMS (Rust)**](https://github.com/ForceFinity/BurgasBusMS) – Wraps TransportBurgas API  
 - [**BDZMS (Python)**](https://github.com/ForceFinity/BDZMS) – Wraps bdz.bg API
